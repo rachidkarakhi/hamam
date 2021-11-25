@@ -1,0 +1,293 @@
+
+     <header>
+      <nav>
+        <div class="menu-container">
+          <input type="checkbox" class="toggler">
+         <div class="hamburger">
+             <div></div>
+         </div>
+         <div class="menu">
+
+                 <div class="menu-hambuger">
+                     <ul>
+                      <li><a href="/" >Accueil</a></li>
+                      <li><a  href="/orders">Commandes</a></li>
+                      <li><a  href="/import">produits</a></li>
+                      <li><a  href="/logout">Se déconnecter</a></li>
+
+                     </ul>
+                 </div>
+
+              <div class="mini-menu">
+
+
+                  <ul >
+
+                      <li class="menu1" style=" background-color:grey;color:black;">
+                          <a >home also</a>
+                          <ul class="ani-menu1" style="background-color: grey;">
+                              <li><a href="/" >Accueil</a></li>
+                              <li><a  href="/orders">Commandes</a></li>
+                              <li><a  href="/import">produits</a></li>
+                              <li><a  href="/logout">Se déconnecter</a></li>
+
+                          </ul>
+                     </li>
+
+                  </ul>
+                 </div>
+
+         </div>
+      </div>
+        <div class="logo">
+            <div class="c">
+                F
+            </div>
+            <div class="title">
+              Family Toys
+            </div>
+        </div>
+        <div class="search-form">
+            <div class="header-icon"><i class="fa fa-search"></i></div>
+
+            <input   type="text" placeholder="search">
+        </div>
+        <div class="acount">
+            <div class="name-acount">
+              {{admin}}
+            </div>
+            <div class="image112">
+                <img src="/assets/othmane.jpg" alt="othmane">
+            </div>
+        </div>
+    </nav>
+    </header>
+    <div class="title-page2">
+           <h1>produits</h1>
+
+           <app-back></app-back>
+        </div>
+
+    <div class="list-product">
+
+        <div class="table" style="margin-top: 15%;">
+
+<div  style="margin-top: 3%;">
+
+    <p-tabMenu [model]="items" [activeItem]="items[0]"></p-tabMenu>
+</div>
+          <div class="p-grid" style="margin-top: 5%;" *ngIf="imp=='gnr1'">
+
+
+
+            <div class="p-col-1"></div>
+            <div class="p-col-10">
+              <h2>Générer le module excel pour l'insertion des produits</h2>
+              <div class="p-field">
+                <label for="fieldId">Les propriétés du produit:</label>
+                <ng-multiselect-dropdown
+                [placeholder]="'merci de choisir les propriétés du produit'"
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+
+            </div>
+             </div>
+           <div class="p-col-1"></div>
+
+
+        </div>
+
+
+        <div class="p-grid" style="margin-top: 5%;"  *ngIf="imp=='gnr1'">
+          <div class="p-col-1"></div>
+          <div class="p-col-8">
+            <button *ngIf="olinkhref && impoSpinner==true" icon="pi pi-spin pi-spinner" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Chargement en cours" ></button>
+
+            <button *ngIf="olinkhref && impoSpinner==false" icon="pi pi-cog" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="générer le module" (click)="send()" ></button>
+            <div *ngIf="!olinkhref">
+              <button  icon="pi pi-download" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Télécharger le module" (click)="downloadfile()" ></button>
+              <button  icon="pi pi-undo" iconPos="left" class="p-button-danger p-button-lg"  pButton type="button" label="initialiser" (click)="init()" ></button>
+            </div>
+          </div>
+
+          <div class="p-col-1"></div>
+        </div>
+
+
+
+
+        <div class="p-grid" style="margin-top: 5%;" *ngIf="imp=='gnr2'">
+
+          <div class="p-col-1"></div>
+          <div class="p-col-10">
+            <h2>Générer le module excel pour l'insertion des variations</h2>
+            <div class="p-field">
+              <label for="fieldId">Les propriétés des variation</label>
+              <ng-multiselect-dropdown
+              [placeholder]="'merci de choisir les propriétés du produit'"
+              [settings]="dropdownSettings"
+              [data]="variationList"
+              [(ngModel)]="selectedVariations"
+              (onSelect)="onItemSelectvariation($event)"
+              (onSelectAll)="onSelectAllvariation($event)"
+            >
+            </ng-multiselect-dropdown>
+
+          </div>
+           </div>
+         <div class="p-col-1"></div>
+
+
+      </div>
+
+
+      <div class="p-grid" style="margin-top: 5%;"  *ngIf="imp=='gnr2'">
+        <div class="p-col-1"></div>
+        <div class="p-col-8">
+          <button *ngIf="olinkhref && impoSpinner2==true" icon="pi pi-spin pi-spinner" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Chargement en cours" ></button>
+          <button *ngIf="olinkhrefvariation && impoSpinner2==false" icon="pi pi-cog" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="générer le module" (click)="sendvariation()" ></button>
+          <div *ngIf="!olinkhrefvariation">
+            <button  icon="pi pi-download" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Télécharger le module" (click)="downloadfilevariation()" ></button>
+            <button  icon="pi pi-undo" iconPos="left" class="p-button-danger p-button-lg"  pButton type="button" label="initialiser" (click)="initvariation()" ></button>
+          </div>
+        </div>
+
+        <div class="p-col-1"></div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="p-grid" style="margin-top: 5%;" *ngIf="imp=='imp1'">
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <p-progressBar [value]="percentage"></p-progressBar>
+      <p>{{calc}} lignes sur {{products.length}}..</p>
+    </div>
+
+  </div>
+  <div class="p-col-1"></div>
+  <div class="p-col-10">
+    <h2>Insertion du fichier excel des produits </h2>
+<div *ngIf="errors.length>0" class="error">
+  <ul >
+    <li *ngFor="let error of errors">{{error}}</li>
+</ul>
+</div>
+<div *ngIf="msg && errors.length==0" class="message">Votre requête a été bien traité</div>
+
+    <div class="p-field">
+
+      <label class="labelclass" for="upload-photo"><i class="pi pi-upload" style="font-size: 2rem"> Upload </i></label>
+      <input type="file" class="file-input"
+      (change)="onFileSelected($event)" #fileUpload id="upload-photo" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+<div class="file-upload">
+
+  {{fileName || ""}}
+
+   <button mat-mini-fab color="primary" class="upload-btn"
+     (click)="fileUpload.click()">
+      <!-- icon here  ! <mat-icon>attach_file</mat-icon> -->
+   </button>
+</div>
+  </div>
+   </div>
+<div class="p-col-1"></div>
+</div>
+<div class="p-grid" style="margin-top: 5%;"  *ngIf="imp=='imp1'">
+  <div class="p-col-1"></div>
+  <div class="p-col-8">
+    <button *ngIf="addtest" icon="pi pi-plus" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Ajouter" (click)="sendfile()" ></button>
+
+  </div>
+
+  <div class="p-col-1"></div>
+</div>
+
+
+<div class="p-grid" style="margin-top: 5%;" *ngIf="imp=='imp2'">
+  <div id="myModal2" class="modal2">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <p-progressBar [value]="percentagevariation"></p-progressBar>
+      <p>{{calcvariation}} lignes sur {{variations.length}}..</p>
+    </div>
+
+  </div>
+  <div class="p-col-1"></div>
+  <div class="p-col-10">
+    <h2>Insertion du fichier excel des variation </h2>
+<div *ngIf="errorsvariation.length>0" class="error">
+  <ul >
+    <li *ngFor="let error of errorsvariation">{{error}}</li>
+</ul>
+</div>
+<div *ngIf="msgvariation && errorsvariation.length==0" class="message">Votre requête a été bien traité</div>
+
+    <div class="p-field">
+
+      <label class="labelclass" for="upload-photo"><i class="pi pi-upload" style="font-size: 2rem"> Upload </i></label>
+      <input type="file" class="file-input"
+      (change)="onFileSelectedVariation($event)" #fileUpload id="upload-photo" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+<div class="file-upload">
+
+  {{fileNameVariation|| ""}}
+
+   <button mat-mini-fab color="primary" class="upload-btn"
+     (click)="fileUpload.click()">
+      <!-- icon here  ! <mat-icon>attach_file</mat-icon> -->
+   </button>
+</div>
+  </div>
+   </div>
+<div class="p-col-1"></div>
+</div>
+<div class="p-grid" style="margin-top: 5%;"  *ngIf="imp=='imp2'">
+  <div class="p-col-1"></div>
+  <div class="p-col-8">
+    <button *ngIf="addtestvariation" icon="pi pi-plus" iconPos="left" class="p-button-secondary p-button-lg"  pButton type="button" label="Ajouter model" (click)="sendfileVariation()" ></button>
+
+  </div>
+
+  <div class="p-col-1"></div>
+</div>
+
+    </div>
+
+    </div>
+
+    <div class="circles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div>
+          <img src="/assets/karossa.svg" alt="">
+        </div>
+
+    </div>
+
+
+

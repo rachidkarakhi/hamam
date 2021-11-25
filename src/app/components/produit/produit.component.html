@@ -1,0 +1,606 @@
+<header>
+  <nav>
+      <div class="logo">
+          <div class="c">
+              F
+          </div>
+          <div class="title">
+              <h2>حمام الفضل</h2>
+                      </div>
+      </div>
+      <div class="">
+         <button></button>
+         <button></button>
+      </div>
+      <div class="acount">
+          <div class="name-acount">
+            {{admin}}
+          </div>
+
+      </div>
+  </nav>
+</header>
+<header>
+  <nav>
+      <div class="menu-container">
+
+         <div class="">
+             <div></div>
+         </div>
+         <div class="menu">
+
+                 <div class="menu-hambuger">
+                     <ul>
+                      <li><a href="/" >Accueil</a></li>
+                      <li><a  href="/orders">Commandes</a></li>
+                      <li><a  href="/import">produits</a></li>
+                      <li><a  href="/logout">Se déconnecter</a></li>
+
+
+
+
+                     </ul>
+                 </div>
+                 <section class="left">
+                  <div class="titre" style="color: blue;" (click)="resultProduits=produits">
+                      Toutes les catégories
+                  </div>
+                  <div *ngFor="let cat of resultCategories">
+                      <div *ngIf="cat.parent == 0">
+
+                  <div class="titre" (click)="getProduitsbyCat(cat.id,1)">
+                      {{cat.name}}
+                  </div>
+                  <div class="all">
+                      <ng-container *ngFor="let scat of resultCategories" >
+
+
+                          <div class="coffee"  *ngIf="cat.id == scat.parent" (click)="getProduitsbyCat(scat.id,1)">
+                              <div class="image">
+                                  <img *ngIf="scat.image" [src]="scat.image" alt="coffee" style="width: 100%; height:150%;">
+                                  <img *ngIf="!scat.image" src="/assets/othmane.jpg" alt="coffee" style="width: 99%; height:200%;">
+
+
+                              <div class="inko"><i class="fas fa-mug-hot"><button ></button></i></div>
+                              <div class="name" >{{scat.name}}</div></div>
+
+                          </div>
+                      </ng-container>
+                       </div>
+
+
+              </div>
+                  </div>
+              </section>
+
+
+         </div>
+      </div>
+      <div class="logo">
+          <div class="c">
+              ح
+          </div>
+          <div class="title">
+            <h2>حمام الفضل</h2>
+          </div>
+      </div>
+
+      <div class="">
+
+        <!-- <ul>
+          <li><a (click)="getProduitsbyCat(16,1)">حمام</a></li>
+          <li><a (click)="getProduitsbyCat(17,1)">المنتجات</a></li>
+          <li><a (click)="navigate('/orders')">الطلبيات</a></li>
+          <li><a (click)="navigate('/logout')">تسجيل الخروج</a></li>
+
+
+        </ul> -->
+        <p-tabMenu [model]="navitems" [activeItem]="navitems[0]"></p-tabMenu>
+
+
+      </div>
+      <div class="acount">
+          <div class="name-acount">
+
+              {{admin}}
+
+
+
+          </div>
+          <div class="image112">
+
+            <img src="/assets/othmane.jpg" alt="othmane">
+          </div>
+      </div>
+  </nav>
+</header>
+<div class="koulchi">
+  <section class="left hero">
+      <div class="titre" style="color: blue;" (click)="resultProduits=produits">
+          Toutes les catégories
+      </div>
+      <div *ngFor="let cat of resultCategories">
+          <div *ngIf="cat.parent == 0">
+
+      <div class="titre" (click)="getProduitsbyCat(cat.id,1)">
+          {{cat.name}}
+      </div>
+      <div class="all">
+          <ng-container *ngFor="let scat of resultCategories" >
+
+
+              <div class="coffee"  *ngIf="cat.id == scat.parent" (click)="getProduitsbyCat(scat.id,1)">
+                  <div class="image">
+                      <img *ngIf="scat.image" [src]="scat.image" alt="coffee" style="width: 99%; height:200%;">
+                      <img *ngIf="!scat.image" src="/assets/othmane.jpg" alt="coffee" style="width: 99%; height:200%;">
+
+
+                  <div class="inko"><i class="fas fa-mug-hot"><button ></button></i></div>
+                  <div class="name" >{{scat.name}}</div></div>
+
+              </div>
+          </ng-container>
+           </div>
+
+
+  </div>
+      </div>
+  </section>
+
+  <!-- <div class="ali">
+      <section class="midle">
+          <h2>0.1 -macchiato milk Tea</h2>
+          <div class="bigg">
+              <div class="botoona">
+                  <button>add to card<p>+</p></button>
+              </div>
+           </div>
+      </section>
+
+   </div>
+    -->
+  <div class="ali">
+
+      <!-- <section class="mobile-v">
+        <div id="myModal2" class="modal2">
+
+           <div class="modal-content" *ngIf="variations.length==0">
+            <p-progressSpinner *ngIf="dataloadervar"> </p-progressSpinner>
+            <p-messages severity="error">
+              <ng-template pTemplate *ngIf="!dataloadervar">
+                <i class="pi pi-times" style="font-size: 1rem;float: right;"  (click)="closemodal()"></i>
+                  <div class="p-ml-2"> Erreur lors du chargement.   <a (click)="addToCart(parentProduct,1)"> Appuyez</a> pour réessayer.</div>
+              </ng-template>
+          </p-messages>
+
+           </div>
+          <div class="modal-content" *ngIf="variations.length>0">
+            <i class="pi pi-times" style="font-size: 1rem;float: right;"  (click)="closemodal()"></i>
+            <p-messages severity="success">
+              <ng-template pTemplate>
+
+                  <div class="p-ml-2"> Produit variable ! merci de choisir une variation.</div>
+              </ng-template>
+          </p-messages>
+            <div class="p-grid">
+              <div class="p-col">
+
+                <div *ngIf="this.selectedVariation.image.src ==null || this.selectedVariation.image.src == ''; else elseBlock"><img style="width: 130px;height: 130px;" src="/assets/box.png"/></div>
+                <ng-template #elseBlock><img #elseBlock style="width: 130px;height: 130px;"     [src]="this.selectedVariation.image.src"/></ng-template>
+                <h3 class="p-mb-1"> {{parentProduct.name}}  </h3>
+                <h4 class="p-mt-0 p-mb-3"> {{this.selectedVariation.price}} Mad </h4>
+
+                <div class="p-mt-0 p-mb-3" style="color: green;" *ngIf="this.selectedVariation.stock_status == 'instock' ;else elseBlock2"  > {{this.selectedVariation.stock_status}} </div>
+                <ng-template #elseBlock2> <div class="p-mt-0 p-mb-3" style="color: red;"> {{this.selectedVariation.stock_status}} </div> </ng-template>
+                <div>
+
+
+                  <div class="all-info" style="border:none; margin-top:10px;"  *ngIf="totalvariation>0" >
+                    <div class="soumia">
+
+                       <p style="color:rgb(29, 29, 29);font-weight:600;margin-bottom: 15px;">Subtotal</p>
+                 <p style="color:rgb(29, 29, 29);font-weight:600; margin-bottom: 15px;">Taxes</p>
+                    <p style="color:rgb(29, 29, 29);font-weight:600;font-size: 22px;margin-bottom: 15px; margin-left: -2px;">Total</p>
+
+                    </div>
+                    <div class="yassine">
+                        <p style="color:green; font-weight: 600; margin-bottom: 15px;"> {{totalvariation| currency:'MAD'}}  </p>
+                        <p style="color:green; font-weight: 600;margin-bottom: 15px;">0.00</p>
+                        <p style="color:green; font-weight: 600; font-size: 22px;margin-bottom: 15px; margin-right: -2px;"> {{totalvariation| currency:'MAD'}} </p>
+
+                   </div>
+               </div>
+
+
+                </div>
+              </div>
+              <div class="p-col" style="border-left: solid;border-color: rgb(226, 216, 213);">
+
+
+
+
+                <label for="multi-select">Variantes de produit :</label>
+                <div class="select select--multiple" >
+                  <select id="multi-select" size="4" (change)="onChangeVariation($event)" [(ngModel)]="selectedVariationoption">
+                  <optgroup style="font-size:20px;">
+                    <option   *ngFor="let variation of variations" [ngValue]="variation.sku">
+
+                      <ng-container *ngFor="let attribute  of variation.attributes" >
+                        <ng-container *ngIf="attribute != variation.attributes[0]"> | </ng-container>
+
+                         {{attribute.name}} : {{attribute.option}}
+                        </ng-container>
+                    </option>
+
+                  </optgroup>
+                  </select>
+                  <span class="focus"></span>
+                </div>
+
+                <div class="botoona " style="margin-top: 10px" >
+                  <button style="width:100% ;font-size:.8em;height:35px" >
+
+                  <div id="layer1" class="here"  style="width:100% ;font-size:.8em;height:35px;background-color: rgba(255, 250, 205, 0.34);">
+                  <div class="grey"style="width:25px;height:25px" (click)="incvariation()">+</div>
+                  <div class="green" style="width:25px;height:25px" ><input style="text-align-last: center;"  type="number" [(ngModel)]="qtyVariation"  min="1"  class="green"></div>
+                  <div class="grey" style="width:25px;height:25px" (click)="dincvariation()">-</div>
+
+                  </div>
+                </button>
+
+                </div>
+                <div class="botoona " style="margin-top: 10px; margin-top: 3em;" >
+                  <button style="width:100% ;font-size:.8em;height:35px" (click)="addToCartvariation()" *ngIf="!updateVariationTest"  >Ajouter au panier</button>
+
+                  <button *ngIf="updateVariationTest" style="width:100% ;font-size:.8em;height:35px" (click)="addToCartvariation()">mettre à jour</button>
+                </div>
+
+                <div class="information" *ngIf="selectedVariations.length>0" >
+                  <h6> Panier </h6>
+                  <hr style="width:80%;display: block;">
+                  <div class="all-info" style="border:none;"  *ngFor="let item of selectedVariations">
+
+
+                    <div class="soumia" style="margin-top:0">
+
+                      <p style="color:rgb(29, 29, 29);font-weight:600;margin-bottom: 10px;">
+                    <ng-container *ngFor="let attribute  of item.variation.attributes" >
+                      <ng-container *ngIf="attribute != item.variation.attributes[0]"> | </ng-container>
+
+                       {{attribute.name}} : {{attribute.option}}
+                      </ng-container>
+                    </p>
+                    <p>Quantité</p>
+
+                    <p>Total</p>
+                    <p>Action</p>
+
+
+
+                    </div>
+                    <div class="yassine"  style="margin-top:0">
+                      <div style="color:green; font-weight: 600; margin-bottom: 10px;" >
+                        {{item.variation.price | currency:'MAD'}}
+                      </div>
+                      <p>
+                        {{item.qty}}
+                      </p>
+                      <p>
+
+                        {{item.qty * changeNumber(item.variation.price) | currency:'MAD'}}
+                    </p>
+                    <p>
+                      <button class="delete" (click)="deleteselected(item.variation)">Supprimer</button>
+
+
+                  </p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+              </div>
+
+            </div>
+
+            <hr style="width:100%;display: block;">
+             <button (click)="closemodal()" pButton type="button" label="Fermer" class="p-button-danger p-button-lg" icon="pi pi-times" iconPos="right" ></button>
+
+             <button *ngIf="selectedVariations.length>0" (click)="addtocartallvariation()" pButton type="button" label="Valider" class="p-button-success p-button-lg" icon="pi pi-check"  iconPos="right" style="float: right;"></button>
+
+          </div>
+
+
+        </div>
+          <div *ngIf="resultProduits.length==0" class="loader large" style=" margin:auto;"></div>
+
+
+                  <div class="p-grid boxss" >
+                      <div class="" style="margin-bottom: 15px; " *ngFor="let row of resultProduits">
+                   <div class="boxs">
+                               <div class="imagess">
+                                  <img style="width: 130px;height: 130px;" *ngIf="row.images.length"    [src]="row.images[0].src"/>
+                                  <img style="width: 130px;height: 130px;" *ngIf="!row.images.length"    src="/assets/box.png"/>
+                              </div>
+                              <h4 class="name-of-game">  {{row.price | currency:'MAD'}}  </h4>
+                              <p class="description" >{{row.name}}</p>
+                              <div class="botoona" style="margin-top: 10px">
+
+                                  <button   *ngIf="row.type !='variable'" style="width:100% ;font-size:.8em;height:35px"> <div (click)="addToCart(row,row.id)">Ajouter au panier</div><div (click)="addToCart(row,row.id)"><p > + </p> </div>
+                                      <div     [ngClass]="row.id + ' ' + setclass(row.id).state"  style="width:90% ;font-size:.8em;height:35px">
+                                      <div class="grey" style="width:25px;height:25px" (click)="inc(row,row.id)">+</div>
+                                      <div class="green" style="width:25px;height:25px" ><input style="text-align-last: center;" id="{{'i'+row.id}}" type="number" value="{{setvalue(row.id).state}}" min="0"  class="green"></div>
+
+                                      <div class="grey" style="width:25px;height:25px" (click)="dinc(row,row.id)">-</div>
+                                      <div class="icone21" ><i class="fas fa-shopping-cart"></i></div>
+                                      </div>
+                                  </button>
+                               <div *ngIf="row.type=='variable'">
+
+                                <button *ngIf="!checkifadded(row.id).state"  style="width:100% ;font-size:.8em;height:35px"> <div (click)="addToCart(row,row.id)">Ajouter au panier</div><div (click)="addToCart(row,row.id)"><p > + </p> </div>
+                                  <div    class="here hidden"  style="width:90% ;font-size:.8em;height:35px">
+                                  <div class="grey" style="width:25px;height:25px" (click)="inc(row,row.id)">+</div>
+                                  <div class="green" style="width:25px;height:25px" ><input style="text-align-last: center;" id="{{'i'+row.id}}" type="number" min="0"  class="green"></div>
+
+                                  <div class="grey" style="width:25px;height:25px" (click)="dinc(row,row.id)">-</div>
+                                  <div class="icone21" ><i class="fas fa-shopping-cart"></i></div>
+                                  </div>
+                              </button>
+
+                              <button *ngIf="checkifadded(row.id).state"  style="width:100% ;font-size:.8em;height:35px;background-color: rgb(86, 110, 86);"> <div (click)="updatevariable(row,row.id)">Mettre à jour</div><div (click)="addToCart(row,row.id)"><p > <i class="pi pi-cog"></i></p> </div>
+                                <div    class="here hidden"  style="width:90% ;font-size:.8em;height:35px">
+                                <div class="grey" style="width:25px;height:25px" (click)="inc(row,row.id)">+</div>
+                                <div class="green" style="width:25px;height:25px" ><input style="text-align-last: center;" id="{{'i'+row.id}}" type="number" min="0"  class="green"></div>
+
+                                <div class="grey" style="width:25px;height:25px" (click)="dinc(row,row.id)">-</div>
+                                <div class="icone21" ><i class="fas fa-shopping-cart"></i></div>
+                                </div>
+                            </button>
+
+
+
+
+
+
+
+                                </div>
+
+
+                              </div>
+                  </div>
+
+                  </div>
+                  </div>
+
+
+
+
+
+      </section> -->
+
+    <section  style="margin-top: 11.5vh;">
+
+     <div *ngIf="resultProduits.length==0" class="loader large" style=" margin:auto;"></div>
+    <div *ngFor="let row of resultProduits">
+        <div class="wrapper">
+          <div class="product-img">
+            <img src="http://bit.ly/2tMBBTd" height="150" width="327"  *ngIf="row.images.length"    [src]="row.images[0].src">
+            <img src="http://bit.ly/2tMBBTd" height="150" width="327" *ngIf="!row.images.length"    src="/assets/box.png">
+          </div>
+          <div class="product-info">
+            <div class="product-text">
+              <h1>{{row.name}}</h1>
+              <h2>{{row.price | currency:'MAD'}}</h2>
+            </div>
+            <div class="product-price-btn">
+              <!-- <button type="button">buy now</button> -->
+              <div  class="botoona " style="margin-top: 10px">
+
+                <button type="button" class="btnstyle"  style=" font-size: 30px;width:100% "> <div (click)="addToCart(row,row.id)">أَضف</div><div (click)="addToCart(row,row.id)"><p > + </p> </div>
+                    <div     [ngClass]="row.id + ' ' + setclass(row.id).state"  style="width:90% ">
+                    <div class="grey"  (click)="inc(row,row.id)">+</div>
+                    <div class="green" style="width:25px;height:25px" ><input style="text-align-last: center;" id="{{'i'+row.id}}" type="number" value="{{setvalue(row.id).state}}" min="0"  class="green"></div>
+
+                    <div class="grey"  (click)="dinc(row,row.id)">-</div>
+                    <div class="icone21" ><i class="fas fa-shopping-cart"></i></div>
+                    </div>
+                </button>
+
+
+
+            </div>
+
+
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+      <section class="right">
+          <div class="scroll">
+          <div class="another-title">
+              <h3 *ngIf="!isexistfund()">
+
+                <p-button class="p-button-info" label="فتح الصندوق" [swal]="{ title: 'فتح الصندوق', input: 'text', showDenyButton: true, denyButtonText: 'Annuler'}"
+                (confirm)="saveFile($event)"
+                (deny)="handleDenial()"
+                ></p-button>
+
+              </h3>
+              <h2 *ngIf="isexistfund()">
+
+                <p-button class="p-button-info" label="إغلاق" (click)="showDialog()" ></p-button>
+                <p-dialog header="تسجيل الدخول" [(visible)]="display" [style]="{width: '50vw'}">
+                  <div *ngIf="data" class="alert1" style="border:none;" >
+
+                    <span class="custom-message" [innerHtml]="data">  </span>
+
+
+                 </div>
+                  <div class="p-inputgroup">
+
+                    <input [(ngModel)]="auth.username" type="text" pInputText placeholder="أدخل إسم المستخدم">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                </div> <br>
+                <div class="p-inputgroup">
+
+                  <input [(ngModel)]="auth.password"  type="password" pInputText placeholder="أدخل كلمة السر">
+                  <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+              </div>
+              <button style="background-color: #4A3D3C;" *ngIf="showloaderpop==false" (click)="verify()"  type="submit" class="loginbtn" >تسجيل الدخول </button>
+              <button class="spnered"  *ngIf="showloaderpop==true" type="submit" ><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></button>
+
+
+            </p-dialog>
+
+
+
+              </h2>
+              <h3>السلة </h3>
+          </div>
+          <div class="information" *ngIf="carts.length>0  && showloader == false">
+
+             <div class="all-info" style="border:none;" *ngFor="let catrt of carts">
+             <div class="soumia">
+
+              <p style="color:rgb(29, 29, 29);margin-bottom: 10px; font-size: 20px; font: bold; ">
+
+                 {{catrt.qtt}} x {{catrt.name}}
+                </p>
+              <!-- <p>الكمية</p> -->
+
+              <p>المجموع</p>
+              <p></p>
+
+              </div>
+              <div class="yassine">
+                  <div style="color:green; font-weight: 600; margin-bottom: 10px;" >
+                      <div id="{{'id'+catrt.product_id}}"   *ngIf="inputshowed!=catrt.product_id" >
+
+                          {{catrt.price}} Dh
+                      </div>
+
+                  </div>
+                  <!-- <p>
+                      {{catrt.qtt}}
+                  </p> -->
+                  <p>
+
+                      {{catrt.qtt*catrt.price}} Dh
+                  </p>
+                  <p>
+                      <button class="delete" (click)="deleteFromCart(catrt.product_id)">حذف</button>
+
+
+                  </p>
+                  </div>
+
+              </div>
+              <hr style="width:80%;text-align:left;margin-left:0">
+
+
+          </div>
+          <div *ngIf="showloader==true" style=" margin:auto;"  class="loader small " ></div>
+         <div class="information" *ngIf="carts.length==0  && showloader == false">
+          <div class="all-info alert" style="border:none;" >
+            سلتك فارغة
+          </div>
+         </div>
+      </div>
+      <div class="all-info" style="border:none; margin:10px; "  *ngIf="total>0" >
+        <div class="soumia">
+           <button   (click)="viderCart()"> حذف الكل </button>
+
+        <p style="color:rgb(29, 29, 29);font-weight:600;font-size: 22px;margin-bottom: 15px; margin-left: -2px;margin-top: 23px;">المجموع</p>
+
+        </div>
+        <div class="yassine">
+
+
+            <p style="color:green; font-weight: 600; font-size: 22px;margin-bottom: 15px; margin-right: -2px;"> {{total}} Dh</p>
+
+       </div>
+   </div>
+          <div class="botton" *ngIf="total>0 && showloader == false">
+
+               <a   (click)="insertorder()" style="font-size: 30px; margin-top: 0px;height: 90px;"><p>سحب التذكرة</p> <div class="ico"><i class="fas fa-money-bill-alt"></i></div></a>
+
+          </div>
+
+      </section>
+
+
+
+
+
+  </div>
+
+
+
+
+
+      <!-- <ngx-datatable class="material" [rows]="resultProduits" [columnMode]="'flex'" [headerHeight]="0" [footerHeight]="0"
+      [rowHeight]="'auto'"  [scrollbarV]="false">
+
+
+      <ngx-datatable-column name="Image"  >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+
+            <div class="ali">
+              <section class="midle" style="margin-top: 11.5vh;">
+                  <h2>{{row.name}} -- {{row.price}} MAD </h2>
+                <div class="bigg">
+
+                      <img *ngIf="row.images.length" class="image0"   [src]="row.images[0].src"/>
+                      <img *ngIf="!row.images.length" class="image0"   src="/assets/box.png"/>
+
+                  <div class="amount">
+
+                          <div class="botoona">
+
+                              <button   (click)="addToCart(row,row.id)">Ajouter au panier<p>+</p>
+                                  <div     [ngClass]="row.id + ' ' + setclass(row.id).state">
+                                     <div class="grey" (click)="inc(row,row.id)">+</div>
+                                     <div class="green" ><input style="text-align-last: center;" id="{{'i'+row.id}}" type="number" value="{{setvalue(row.id).state}}" min="0"  class="green"></div>
+
+                                     <div class="grey" (click)="deleteFromCart(row.id)">-</div>
+                                     <div class="icone21" ><i class="fas fa-shopping-cart"></i></div>
+                                  </div>
+                               </button>
+
+                          </div>
+
+
+                  </div>
+               </div>
+
+
+              </section>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+
+
+
+
+    </ngx-datatable> -->
+
+
+</div>

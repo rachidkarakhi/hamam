@@ -1,0 +1,202 @@
+
+  <header>
+    <nav>
+        <div class="menu-container">
+            <input type="checkbox" class="toggler">
+           <div class="hamburger">
+               <div></div>
+           </div>
+           <div class="menu">
+
+                   <div class="menu-hambuger">
+                       <ul>
+                        <li><a href="/" >Accueil</a></li>
+                         <li><a  href="/orders">Commandes</a></li>
+                                <li><a  href="/import">produits</a></li>
+                         <li><a  href="/logout">Se déconnecter</a></li>
+
+                       </ul>
+                   </div>
+
+                <div class="mini-menu">
+
+
+                    <ul >
+
+                        <li class="menu1" style=" background-color:grey;color:black;">
+                            <a >home also</a>
+                            <ul class="ani-menu1" style="background-color: grey;">
+                                <li><a href="/" >Accueil</a></li>
+                                 <li><a  href="/orders">Commandes</a></li>
+                                <li><a  href="/import">produits</a></li>
+                              <li><a  href="/logout">Se déconnecter</a></li>
+                            </ul>
+                       </li>
+
+                    </ul>
+                   </div>
+
+           </div>
+        </div>
+        <div class="logo">
+            <div class="c">
+                F
+            </div>
+            <div class="title">
+                Family Toys
+            </div>
+        </div>
+        <form action="" class="search-form">
+            <div class="header-icon"><i class="fa fa-search"></i></div>
+            <input type="text" placeholder="search">
+        </form>
+        <div class="acount">
+            <div class="name-acount">
+              {{admin}}
+                  </div>
+            <div class="image112">
+                <img src="/assets/othmane.jpg" alt="othmane">
+            </div>
+        </div>
+    </nav>
+  </header>
+
+<div class="p-grid">
+    <!-- description -->
+    <div class="p-col-8">
+<div class="description-title">
+  <h1>
+      la Commande N {{id}}
+  </h1>
+  <app-back></app-back>
+</div>
+<section >
+        <div class="info-description ">
+          <div *ngIf="loader" class="loader large" style=" margin:auto;"></div>
+          <div *ngIf="loader==false">
+           <div class="info-description-col" *ngFor="let row of order.line_items">
+             <div class="drink"></div>
+             <div class="cross"  > <i class="fas fa-times" (click)="deleteFromorder(row)"></i></div>
+             <div class="info-description-col-box">
+                <div class="image-info">
+                   <img  src="/assets/nike.jpg" alt="">
+                 </div>
+                 <div class="info-commande">
+                  <div class="par">
+
+
+                    <p>{{row.name}}</p>
+
+                 </div>
+
+                 <div class="par1">
+                    <p>Total:  {{row.total | currency:'MAD'}}</p>
+
+                    <p> {{row.price | currency:'MAD'}} * {{row.quantity}}</p>
+
+
+                  </div>
+
+                </div>
+                 <div class="price">
+                     <p (click)="inc(row)">+</p>
+                    <p> {{row.quantity}}</p>
+                    <p (click)="dinc(row)">-</p>
+                 </div>
+              </div>
+           </div>
+
+          </div>
+
+
+            <!-- <div class="add-new">
+              <a href="#"> add to card</a>
+          </div> -->
+
+
+        </div>
+</section>
+</div>
+<!-- end of description -->
+
+<div class="p-col-4">
+  <!-- right -->
+  <section class="right" >
+      <div class="another-title">
+          <h3>
+            Remboursement
+
+          </h3>
+
+      </div>
+
+      <div *ngIf="showm==true" style=" margin:auto;"  class="loader small " ></div>
+      <div *ngIf="showm==false">
+
+      <div  class="information" >
+          <div *ngIf="line_items.length">
+          <div   class="all-info" *ngFor="let item of line_items">
+         <div class="left-info">
+             <p style="color:rgb(29, 29, 29);font-weight:600;margin-bottom: 5px;">{{item.name}}</p>
+             <p>Quantité</p>
+             <p>total</p>
+             <p>action</p>
+
+          </div>
+          <div class="right-info">
+             <p style="color:green; font-weight: 600; margin-bottom: 5px;">{{item.price}}</p>
+
+             <p>{{item.quantity}}</p>
+             <p>{{item.total}}</p>
+
+             <p> <button (click)="deleteFromRefund(item)"  class="delete">Supprimer</button> </p>
+          </div>
+         </div>
+        </div>
+   <div class="all-info" style="border:none; margin-top:10px;" >
+                 <div class="soumia">
+
+                    <p style="color:rgb(29, 29, 29);font-weight:600; margin-bottom: 15px;">montant</p>
+                    <p style="color:rgb(29, 29, 29);font-weight:600; margin-bottom: 15px;">Raison</p>
+                 </div>
+
+                 <div class="yassine">
+
+                     <input  [(ngModel)]="myRefund.amount" type="text" class="refunds"  style="color:rgb(29, 29, 29);font-weight:550; margin-bottom: 15px;"  (change)="changetomanually()">
+
+                <textarea [(ngModel)]="myRefund.reason" style="color:rgb(29, 29, 29);font-weight:550;border-color: green; " name="" id="" cols="28" rows="2"></textarea>
+
+                </div>
+
+              </div>
+
+      </div>
+      <div class="botton" >
+
+
+           <a  (click)="insertrefund()">
+               <p>
+                 Rembourser
+
+              </p>
+               <div *ngIf="manually" class="ico" style="margin-right: 5px;">
+                manuellement
+              </div>
+          </a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="circles">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+
+  </div>
+</div>
+
+</div>

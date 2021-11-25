@@ -1,0 +1,124 @@
+
+
+     <header>
+        <nav>
+            <div class="menu-container">
+                <input type="checkbox" class="toggler">
+               <div class="hamburger">
+                   <div></div>
+               </div>
+               <div class="menu">
+
+                       <div class="menu-hambuger">
+                           <ul>
+                            <li><a href="/" >Accueil</a></li>
+                             <li><a  href="/orders">Commandes</a></li>
+                                <li><a  href="/import">produits</a></li>
+                                <li><a  href="/logout">Se déconnecter</a></li>
+
+                           </ul>
+                       </div>
+
+                    <div class="mini-menu">
+
+
+                        <ul >
+
+                            <li class="menu1" style=" background-color:grey;color:black;">
+                                <a >home also</a>
+                                <ul class="ani-menu1" style="background-color: grey;">
+                                    <li><a href="/" >Accueil</a></li>
+                                     <li><a  href="/orders">Commandes</a></li>
+                                <li><a  href="/import">produits</a></li>
+                                     <li><a  href="/logout">Se déconnecter</a></li>
+
+                                </ul>
+                           </li>
+
+                        </ul>
+                       </div>
+
+               </div>
+            </div>
+            <div class="logo">
+                <div class="c">
+                    F
+                </div>
+                <div class="title">
+                    Family Toys
+                </div>
+            </div>
+            <form action="" class="search-form">
+                <div class="header-icon"><i class="fa fa-search"></i></div>
+                <input type="text" placeholder="search">
+            </form>
+            <div class="acount">
+                <div class="name-acount">
+                  {{admin}}
+                </div>
+                <div class="image112">
+                    <img src="/assets/othmane.jpg" alt="othmane">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="title-page2">
+           <h1> Liste de retour</h1>
+           <app-back></app-back>
+        </div>
+    <div class="list-product">
+
+        <h1>commande N <a [attr.href]="'orders/'+this.id">#{{this.id}}</a> </h1>
+        <div class="table">
+            <div *ngIf="loader" class="loader large" style=" margin:auto;"></div>
+        <div *ngIf="loader==false">
+        <p-table [value]="resultRefunds" sortMode="multiple">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                  <th pSortableColumn="amount">montant <p-sortIcon field="amount"></p-sortIcon></th>
+                  <th pSortableColumn="reason">raison <p-sortIcon field="reason"></p-sortIcon></th>
+                  <th pSortableColumn="reason">User <p-sortIcon field="reason"></p-sortIcon></th>
+                  <th pSortableColumn="date_created">date de creation <p-sortIcon field="date_created"></p-sortIcon></th>
+                  <th>action</th>
+              </tr>
+          </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td>{{row.id}}</td>
+                    <td> {{row.amount | currency:'MAD'}}</td>
+                    <td>{{row.reason}}</td>
+                    <td>{{ setclass(row.refunded_by).state}} </td>
+                    <td>{{row.date_created}}</td>
+
+                    <td>
+                        <button *ngIf="inputshowed!=row.id" id="{{'id'+ row.id}}" class="delete" (click)="confirmeMethod(row)" >Supprimer</button>
+                        <i *ngIf="inputshowed==row.id" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                    </td>
+
+
+                </tr>
+            </ng-template>
+
+        </p-table>
+        </div>
+    </div>
+    <!-- <a href="#" class="next">
+        Next
+        <div class="triangle">
+            <i class="fas fa-arrow-circle-right"></i>
+        </div>
+    </a> -->
+    </div>
+    <div class="circles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <!-- <div><img src="karossa" alt=""></div> -->
+
+    </div>

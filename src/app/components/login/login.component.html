@@ -1,0 +1,64 @@
+
+
+     <header>
+
+    </header><div class="title-page2">
+           <h1 style="color: #cf4944;">تسجيل الدخول</h1>
+
+
+        </div>
+
+    <div class="list-product">
+
+
+        <div class="">
+
+
+        <!-- <div *ngIf="loader" class="loader large" style=" margin:auto;"></div> -->
+
+        <form action="action_page.php" method="post">
+
+
+          <div class="container">
+
+          <div *ngIf="data" class="alert" style="border:none;" >
+
+            <span class="custom-message" [innerHtml]="data">  </span>
+
+
+         </div>
+
+            <label for="uname" ><b>اسم المستخدم</b></label>
+            <input [(ngModel)]="auth.username" type="text" placeholder="أدخل إسم المستخدم" name="uname" required>
+
+            <label for="psw"><b>كلمه السر</b></label>
+            <input [(ngModel)]="auth.password" type="password" placeholder="أدخل كلمة السر" name="psw" required>
+
+            <button style="background-color: #cf4944;" *ngIf="showloader==false" type="submit" (click)="verify()">تسجيل الدخول </button>
+
+            <button *ngIf="showloader==true" type="submit" ><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></button>
+          </div>
+
+          <div class="container" style="background-color:#f1f1f1">
+
+          </div>
+        </form>
+    </div>
+
+    </div>
+    <!-- <div class="circles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div>
+          <img src="/assets/karossa.svg" alt="">
+        </div>
+
+    </div> -->
+
+
+
